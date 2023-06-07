@@ -17,6 +17,8 @@ app.set('views', 'views');
 
 console.log(path.join(__dirname, 'public', 'index.css'));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.urlencoded({extended: true}));
+
 app.use('/', homeRoutes);
 app.use('/courses', coursesRoutes);
 app.use('/add', addRoutes);

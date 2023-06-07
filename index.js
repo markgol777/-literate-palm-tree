@@ -1,11 +1,10 @@
 const express = require('express');
 const path = require('path');
 const exphb = require('express-handlebars');
+const app = express();
 const homeRoutes = require('./routes/home');
 const coursesRoutes = require('./routes/courses');
 const addRoutes = require('./routes/add');
-
-const app = express();
 
 const hbs = exphb.create({
     defaultLayout: 'main',
@@ -15,29 +14,16 @@ const hbs = exphb.create({
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.set('views', 'views');
+
+console.log(path.join(__dirname, 'public', 'index.css'));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({extended: false}));
-app.use('/', homeRoutes)
-app.use('courses', coursesRoutes)
-app.use('add', addRoutes)
+app.use('/', homeRoutes);
+app.use('/courses', coursesRoutes);
+app.use('/add', addRoutes);
 
 
-app.get('/courses', (req,res ) => {
-    res.render('courses', {
-        title: 'courses',
-        isCourses: true
-    })
-})
-
-app.get('/add', (req,res ) => {
-    res.render('add', {
-        title: 'add',
-        isAdd: true
-    })
-})
-
-const PORT = process.env.PORT || 6996;
+const PORT = process.env.PORT || 1111;
 
 app.listen(PORT, () => {
-    console.log(`server is running on http://localhost:${PORT}/`);
+    console.log(`server has been started on port ${PORT}`);
 })

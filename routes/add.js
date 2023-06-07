@@ -2,17 +2,16 @@ const {Router} = require('express');
 const router = Router();
 
 router.get('/', (req, res) => {
-    res.render('about', {
-        title: 'about',
-        isAbout: true
+    res.render('add', {
+        title: 'add',
+        isAdd: true
     });
 })
-
 
 router.post('/', (req, res) => {
     console.log(req.body);
 
-    res.redirect('courses')
+    res.redirect('/courses')
 })
 
 module.exports = router;
